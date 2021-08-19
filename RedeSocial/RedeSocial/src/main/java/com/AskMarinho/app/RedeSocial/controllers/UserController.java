@@ -145,6 +145,74 @@ public class UserController {
 
 		if (existingUser.isPresent()) {
 			
+				/*int comentarios = existingUser.get().getComments().size();
+				int postagens = existingUser.get().getPosts().size();
+				for (int i = 0; i < comentarios; i++) {
+					/*existingUser.get().getComments().get(i).getUserReportComment().clear();
+					existingUser.get().getComments().get(i).getUserUpvoteComment().clear();
+					repositoryC.save(existingUser.get().getComments().get(i));*/
+					/*	repositoryC.deleteById(existingUser.get().getComments().get(0).getIdComment());		
+				}
+				for (int i = 0; i < postagens; i++) {
+					/*existingUser.get().getPosts().get(i).getUserReportPost().clear();
+					existingUser.get().getPosts().get(i).getUserUpvotePost().clear();
+					if (existingUser.get().getPosts().get(i).getComment().size() > 0) {
+						for (int j = 0; j < existingUser.get().getPosts().get(i).getComment().size(); j++) {
+							existingUser.get().getPosts().get(i).getComment().get(j).getUserReportComment().clear();
+							existingUser.get().getPosts().get(i).getComment().get(j).getUserUpvoteComment().clear();
+						}
+					}
+					repositoryP.save(existingUser.get().getPosts().get(i));*/
+				/*	repositoryP.deleteById(existingUser.get().getPosts().get(0).getIdPost());
+				}*/
+				
+				int a = existingUser.get().getUpvoteComment().size();
+				int b = existingUser.get().getUpvotePost().size();
+				int c = existingUser.get().getReportComment().size();
+				int d = existingUser.get().getReportPost().size();
+				if(existingUser.get().getUpvoteComment().size() > 0) {
+				
+					for (int i = 0; i < a; i++) {
+						
+						existingUser.get().getUpvoteComment().get(0).getUserUpvoteComment().remove(existingUser.get());
+						repositoryC.save(existingUser.get().getUpvoteComment().get(0));
+						//existingUser.get().getUpvoteComment().remove(0);
+						
+					}
+					//existingUser.get().getUpvoteComment().clear();
+				}
+				
+				if (existingUser.get().getUpvotePost().size() > 0) {
+					//existingUser.get().getUpvotePost().clear();
+					for (int i = 0; i < b; i++) {
+						existingUser.get().getUpvotePost().get(0).getUserUpvotePost().remove(existingUser.get());
+						repositoryP.save(existingUser.get().getUpvotePost().get(0));
+						//existingUser.get().getUpvotePost().remove(0);
+					}
+				}
+				
+				if (existingUser.get().getReportComment().size() > 0) {
+					//existingUser.get().getReportComment().clear();
+					for (int i = 0; i < c; i++) {
+						
+						existingUser.get().getReportComment().get(0).getUserReportComment().remove(existingUser.get());
+						repositoryC.save(existingUser.get().getReportComment().get(0));
+						//existingUser.get().getReportComment().remove(0);
+						
+					}
+				}
+				
+				if (existingUser.get().getReportPost().size() > 0) {
+					//existingUser.get().getReportPost().clear();
+					for (int i = 0; i < d; i++) {
+						existingUser.get().getReportPost().get(0).getUserReportPost().remove(existingUser.get());
+						repositoryP.save(existingUser.get().getReportPost().get(0));
+						//existingUser.get().getReportPost().remove(0);
+					}
+				} 
+			
+				repositoryU.save(existingUser.get());
+			
 			repositoryU.deleteById(id_user);
 			
 			return ResponseEntity.status(200).body("USUÁRIO DELETADO");
@@ -266,6 +334,32 @@ public class UserController {
 		return serviceU.deletePostTheme(idPost, idTheme);
 	}
 
+	/**
+	 * . Rota para retornar o número de likes de um post
+	 * 
+	 * @param idPost
+	 * @author Bueno
+	 * @author Antonio
+	 * @return
+	 */
+	/*@GetMapping("/posts/upvotes/{idPost}")
+	public ResponseEntity<String> upvotesPost(@PathVariable(value = "idPost") Long idPost) {
+		return serviceU.upvotesPost(idPost);
+	}*/
+
+	/**
+	 * Rota para retornar o número de reports de um post
+	 * 
+	 * @param idPost
+	 * @author Antonio
+	 * @author Bueno
+	 * @return
+	 */
+	/*@GetMapping("/posts/reports/{idPost}")
+	public ResponseEntity<String> reportsPost(@PathVariable(value = "idPost") Long idPost) {
+		return serviceU.reportsPosts(idPost);
+	}*/
+
 	// ----------------------- TEMAS -----------------------
 
 	/**
@@ -356,6 +450,31 @@ public class UserController {
 		}
 	}
 
+	/**
+	 * Rota para receber o número de likes de um comentário
+	 * 
+	 * @param idComment
+	 * @author Antonio
+	 * @author Bueno
+	 * @return
+	 */
+	/*@GetMapping("/comments/upvotes/{idComment}")
+	public ResponseEntity<String> upvotesComment(@PathVariable(value = "idComment") Long idComment) {
+		return serviceU.upvotesComment(idComment);
+	}*/
+
+	/**
+	 * Rota para números de reports em um comentário
+	 * 
+	 * @param idComment
+	 * @author Antonio
+	 * @author Bueno
+	 * @return
+	 */
+	/*@GetMapping("/comments/reports/{idComment}")
+	public ResponseEntity<String> reportsComments(@PathVariable(value = "idComment") Long idComment) {
+		return serviceU.reportsComments(idComment);
+	}*/
 
 	// ----------------------- DENÚNCIAS -----------------------
 
@@ -389,6 +508,20 @@ public class UserController {
 		return serviceU.reportComment(idUser, idComment);
 	}
 
+	/**
+	 * Rota para retirar um report
+	 * 
+	 * @param idReport
+	 * @param idUser
+	 * @author Antonio
+	 * @return
+	 */
+	/*@DeleteMapping("/report/delete/{idReport}/{idUser}")
+	public ResponseEntity<Object> deleteReport(@PathVariable(value = "idReport") Long idReport,
+			@PathVariable(value = "idUser") Long idUser) {
+		return serviceU.deleteReport(idReport, idUser);
+
+	}*/
 
 	// ----------------------- UPVOTES -----------------------
 
@@ -422,175 +555,19 @@ public class UserController {
 
 		return serviceU.upvoteComment(idUser, idComment);
 	}
-	
+
 	/**
-	 * Rota para deletar todos os comentários de um usuário.
+	 * Rota para retirar um like
 	 * 
-	 * @param idUser: id do usuário
+	 * @param idUpvote
+	 * @param idUser
 	 * @author Antonio
-	 * @return usuário referente ao id
+	 * @return
 	 */
-	@DeleteMapping("/comments/delete/all/{idUser}")
-	public ResponseEntity<Usuario> deleteAllComments(@PathVariable(value = "idUser") Long idUser) {
-		Optional<Usuario> existingUser = repositoryU.findById(idUser);
+	/*@DeleteMapping("/upvotes/delete/{idUpvote}/{idUser}")
+	public ResponseEntity<Object> unupvote(@PathVariable(value = "idUpvote") Long idUpvote,
+			@PathVariable(value = "idUser") Long idUser) {
+		return serviceU.unupvote(idUpvote, idUser);
+	}*/
 
-		if (existingUser.isPresent()) {
-
-			for (Comment forComment: existingUser.get().getComments()) {
-				repositoryC.delete(forComment);
-			}
-			
-			return ResponseEntity.status(200).body(repositoryU.save(existingUser.get()));
-		}
-		
-		
-		return ResponseEntity.status(400).build();
-	}
-	
-	/**
-	 * Rota para deletar todos os posts de um usuário.
-	 * 
-	 * @param idUser: id do usuário
-	 * @author Antonio
-	 * @return usuário referente ao id
-	 */
-	@DeleteMapping("/posts/delete/all/{idUser}")
-	public ResponseEntity<Usuario> deleteAllPosts(@PathVariable(value = "idUser") Long idUser) {
-		Optional<Usuario> existingUser = repositoryU.findById(idUser);
-
-		if (existingUser.isPresent()) {
-
-			for (Post forPost: existingUser.get().getPosts()) {
-				repositoryP.delete(forPost);
-			}
-			
-			return ResponseEntity.status(200).body(repositoryU.save(existingUser.get()));
-		}
-		
-		
-		return ResponseEntity.status(400).build();
-	}
-	
-	/**
-	 * Rota para retirar todos os upvotes em comentários de um usuário.
-	 * 
-	 * @param idUser: id do usuário
-	 * @author Antonio
-	 * @return usuário referente ao id
-	 */
-	@DeleteMapping("/comments/delete/allUpvotes/{idUser}")
-	public ResponseEntity<Usuario> deleteAllUpvotesComment(@PathVariable(value = "idUser") Long idUser) {
-		Optional<Usuario> existingUser = repositoryU.findById(idUser);
-
-		if (existingUser.isPresent()) {
-			
-			if(existingUser.get().getUpvoteComment().size() > 0) {
-				
-				for (Comment commentUnupvote: existingUser.get().getUpvoteComment()) {
-					
-					commentUnupvote.getUserUpvoteComment().remove(existingUser.get());
-					repositoryC.save(commentUnupvote);	
-					
-				}
-				
-			}
-			
-			return ResponseEntity.status(200).body(repositoryU.save(existingUser.get()));
-		}
-		
-		return ResponseEntity.status(400).build();
-	}
-	
-	/**
-	 * Rota para retirar todos os reports em comentários de um usuário.
-	 * 
-	 * @param idUser: id do usuário
-	 * @author Antonio
-	 * @return usuário referente ao id
-	 */
-	@DeleteMapping("/comments/delete/allReports/{idUser}")
-	public ResponseEntity<Usuario> deleteAllReportsComment(@PathVariable(value = "idUser") Long idUser) {
-		Optional<Usuario> existingUser = repositoryU.findById(idUser);
-
-		if (existingUser.isPresent()) {
-
-			
-			if (existingUser.get().getReportComment().size() > 0) {
-				
-				for (Comment commentUnreport : existingUser.get().getReportComment()) {
-					
-					commentUnreport.getUserReportComment().remove(existingUser.get());
-					repositoryC.save(commentUnreport);
-					
-				}
-			}
-			
-			return ResponseEntity.status(200).body(repositoryU.save(existingUser.get()));
-		}
-		
-		
-		return ResponseEntity.status(400).build();
-	}
-	
-	/**
-	 * Rota para retirar todos os upvotes em posts de um usuário.
-	 * 
-	 * @param idUser: id do usuário
-	 * @author Antonio
-	 * @return usuário referente ao id
-	 */
-	@DeleteMapping("/posts/delete/allUpvotes/{idUser}")
-	public ResponseEntity<Usuario> deleteAllUpvotesPost(@PathVariable(value = "idUser") Long idUser) {
-		Optional<Usuario> existingUser = repositoryU.findById(idUser);
-
-		if (existingUser.isPresent()) {
-
-			
-			if (existingUser.get().getUpvotePost().size() > 0) {
-				
-				for (Post postUnupvote: existingUser.get().getUpvotePost()) {
-					postUnupvote.getUserUpvotePost().remove(existingUser.get());
-					repositoryP.save(postUnupvote);
-					
-				}
-			}
-			
-			return ResponseEntity.status(200).body(repositoryU.save(existingUser.get()));
-		}
-		
-		
-		return ResponseEntity.status(400).build();
-	}
-	
-	/**
-	 * Rota para retirar todos os reports em posts de um usuário.
-	 * 
-	 * @param idUser: id do usuário
-	 * @author Antonio
-	 * @return usuário referente ao id
-	 */
-	@DeleteMapping("/posts/delete/allReports/{idUser}")
-	public ResponseEntity<Usuario> deleteAllReportsPost(@PathVariable(value = "idUser") Long idUser) {
-		Optional<Usuario> existingUser = repositoryU.findById(idUser);
-
-		if (existingUser.isPresent()) {
-
-			
-			if (existingUser.get().getReportPost().size() > 0) {
-				
-				for (Post postUnreport: existingUser.get().getReportPost()) {
-					postUnreport.getUserReportPost().remove(existingUser.get());
-					repositoryP.save(postUnreport);
-					
-				}
-			} 
-			
-			return ResponseEntity.status(200).body(repositoryU.save(existingUser.get()));
-		}
-		
-		
-		return ResponseEntity.status(400).build();
-	}
-	
-	
 }

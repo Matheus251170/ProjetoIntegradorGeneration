@@ -31,7 +31,7 @@ public class Tag {
 	private long idTag;
 
 	@NotNull
-	@Size(min = 3, max = 25)
+	@Size(min = 3, max = 100)
 	private String tagName;
 
 	@ManyToMany(mappedBy = "tagRelation")

@@ -34,7 +34,7 @@ public class Comment {
 	private long idComment;
 
 	@NotNull
-	@Size(min = 1, max = 155)
+	@Size(min = 1, max = 100)
 	private String text;
 	
 	@Temporal(TemporalType.TIMESTAMP)
